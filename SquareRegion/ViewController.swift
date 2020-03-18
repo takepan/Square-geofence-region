@@ -9,7 +9,6 @@
 import UIKit
 import MapKit
 
-
 class ViewController: UIViewController {
 
     var locationManager: CLLocationManager!
@@ -23,7 +22,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-         setupLocation()
+        setupLocation()
         setupMap()
         setupData()
 
@@ -47,9 +46,6 @@ class ViewController: UIViewController {
             locationManager.startUpdatingLocation()
         }
     }
-
-
-
 
     func setupMap(){
 
@@ -75,24 +71,16 @@ class ViewController: UIViewController {
         regionDelegate = self
     }
 
-
-
     func setupData(){
 
-
-
-        let steakHouseCoordinate = CLLocationCoordinate2D.init(latitude:  37.788381, longitude:  -122.408937)
-
-
-        let bankCoordinate = CLLocationCoordinate2D.init(latitude:   37.788867, longitude: -122.408769)
-
-        let nailSalonCoordinate = CLLocationCoordinate2D.init(latitude: 37.789302, longitude: -122.408985)
+        let steakHouseCoordinate = CLLocationCoordinate2D.init(latitude: 37.788381, longitude: -122.408937)
+        let bankCoordinate       = CLLocationCoordinate2D.init(latitude: 37.788867, longitude: -122.408769)
+        let nailSalonCoordinate  = CLLocationCoordinate2D.init(latitude: 37.789302, longitude: -122.408985)
 
         // setup regions
         let steakHouseRegion = CKSquareRegion.init(regionWithCenter: steakHouseCoordinate, sideLength: 0.025, identifier: "steakHouse", onEntry: true, onExit: true)
         let bankRegion = CKSquareRegion.init(regionWithCenter: bankCoordinate, sideLength: 0.025, identifier: "bank", onEntry: false, onExit: true)
         let nailSalonRegion =  CKSquareRegion.init(regionWithCenter: nailSalonCoordinate, sideLength: 0.025, identifier: "nailSalon", onEntry: true, onExit: false)
-
 
         // add region to monitor
         regionDelegate.addRegionToMonitor(region: steakHouseRegion!)
@@ -100,28 +88,27 @@ class ViewController: UIViewController {
         regionDelegate.addRegionToMonitor(region: nailSalonRegion!)
 
         let steakHousePoint = [
-            CLLocationCoordinate2D.init(latitude:  37.788477, longitude:  -122.409054),
-            CLLocationCoordinate2D.init(latitude: 37.788503, longitude:  -122.408864),
-            CLLocationCoordinate2D.init(latitude:  37.788324, longitude: -122.408806),
-            CLLocationCoordinate2D.init(latitude:  37.788301, longitude:  -122.409003)]
+            CLLocationCoordinate2D.init(latitude: 37.788477, longitude: -122.409054),
+            CLLocationCoordinate2D.init(latitude: 37.788503, longitude: -122.408864),
+            CLLocationCoordinate2D.init(latitude: 37.788324, longitude: -122.408806),
+            CLLocationCoordinate2D.init(latitude: 37.788301, longitude: -122.409003)]
         let bankPoint = [
-            CLLocationCoordinate2D.init(latitude:  37.788854, longitude: -122.408652),
-            CLLocationCoordinate2D.init(latitude: 37.788941, longitude:  -122.408683),
+            CLLocationCoordinate2D.init(latitude: 37.788854, longitude: -122.408652),
+            CLLocationCoordinate2D.init(latitude: 37.788941, longitude: -122.408683),
             CLLocationCoordinate2D.init(latitude: 37.788917, longitude: -122.408880),
             CLLocationCoordinate2D.init(latitude: 37.788826, longitude: -122.408865)
                         ]
         let nailSalonPoint = [
-            CLLocationCoordinate2D.init(latitude:  37.789337, longitude: -122.409075),
-            CLLocationCoordinate2D.init(latitude:  37.789349, longitude: -122.408925),
-            CLLocationCoordinate2D.init(latitude:  37.789261, longitude:  -122.408875),
-            CLLocationCoordinate2D.init(latitude:  37.789247, longitude: -122.409059)]
+            CLLocationCoordinate2D.init(latitude: 37.789337, longitude: -122.409075),
+            CLLocationCoordinate2D.init(latitude: 37.789349, longitude: -122.408925),
+            CLLocationCoordinate2D.init(latitude: 37.789261, longitude: -122.408875),
+            CLLocationCoordinate2D.init(latitude: 37.789247, longitude: -122.409059)]
 
         let bankPolygon = MKPolygon.init(coordinates: bankPoint, count: 4)
         let steakHousePolygon = MKPolygon.init(coordinates: steakHousePoint, count: 4)
         let nailSalonPolygon = MKPolygon.init(coordinates: nailSalonPoint, count: 4)
 
         mapView.addOverlays([bankPolygon,nailSalonPolygon,steakHousePolygon])
-        
 
         // setup anotation
         let steakHouseAnnotation = MKPointAnnotation()
@@ -159,6 +146,7 @@ extension ViewController: CLLocationManagerDelegate{
         }
     }
 }
+
 extension ViewController: SquareRegionDelegate{
 
     func didEnterRegion(region: CKSquareRegion) {
@@ -171,10 +159,9 @@ extension ViewController: SquareRegionDelegate{
 
     func didExitRegion(region: CKSquareRegion) {
 
-
         let message = "The \(region.identifier  ?? "") was happy to see you too, Bye"
         Helpers.showAlert("leave region", sender: self, message: message)
-         print("*** leave \(region.identifier  ?? "") ****")
+        print("*** leave \(region.identifier  ?? "") ****")
 
     }
 
