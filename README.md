@@ -2,7 +2,7 @@
 
 ## Overview
 
-square region geofence is a lightweight geofence pod that allows you to cfreate a squared region which is an alternative to circular region.
+square region geofence is a lightweight geofence pod that allows you to create a squared region which is an alternative to circular region.
 
 ## Demo
 
